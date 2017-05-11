@@ -52,21 +52,31 @@ namespace EFDemoDelete
 
                 //delId = Guid.Parse(Console.ReadLine());
                 var posts = db.Get<Post>().Where(x => x.BlogId == delId);
-                var updateCount = posts.Update(x=> new Post() { Content = x.Content + "bbbbbb"}
+                var updateCount = posts.Update(x=> new Post() { Content = x.Content + "cccc"}
                     );
                 Console.WriteLine($"Modified ele count: {updateCount}");
+                // 如不重新会有缓存
                 foreach (var post in posts)
                 {
                     db.Entry(post).Reload();
                     Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
                 }
                 Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("old");
                 //var db2 = new CascadeDbContext();
                 db.Get<Post>().Where(x=>x.BlogId == delId).ToList().ForEach(post =>
                 {
                     Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
                 });
-                
+                // 如果没有entity reload 就要重新连
+                //Console.WriteLine(Environment.NewLine);
+                //Console.WriteLine("new");
+                //var db2 = new CascadeDbContext();
+                //db2.Get<Post>().Where(x => x.BlogId == delId).ToList().ForEach(post =>
+                //{
+                //    Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
+                //});
+
                 //delResult = db.Get<Post>().Where(x => x.BlogId == delId).Delete();
                 //Console.WriteLine($"deleted rows : {delResult}");
             }
