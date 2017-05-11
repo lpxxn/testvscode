@@ -13,7 +13,7 @@ namespace EFDemoDelete
         public CascadeDbContext() : base("cs")
         {
             //if (typeof(StandardInitialization).BaseType.Name != typeof(DropCreateDatabaseAlways<>).Name)
-                //Database.Log = Console.WriteLine;
+                Database.Log = Console.WriteLine;
         }
         public DbSet<T> Get<T>() where T : class
         {
@@ -29,7 +29,7 @@ namespace EFDemoDelete
 
 
     // DropCreateDatabaseAlways   CreateDatabaseIfNotExists
-    public class StandardInitialization : DropCreateDatabaseAlways<CascadeDbContext>
+    public class StandardInitialization : CreateDatabaseIfNotExists<CascadeDbContext>
     {
         protected override void Seed(CascadeDbContext context)
         {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using EFDemo;
@@ -42,9 +44,29 @@ namespace EFDemoDelete
                 //db.SaveChanges();
 
                 // 3
-                var delResult = db.Get<Blog>().Where(x => x.BlogId == delId).Delete();
-                Console.WriteLine($"deleted rows : {delResult}");
+                //var delResult = db.Get<Blog>().Where(x => x.BlogId == delId).Delete();
+                //Console.WriteLine($"deleted rows : {delResult}");
 
+                //Console.WriteLine(Environment.NewLine + "Update Blog");
+                //Console.WriteLine("type blogId that used to Update:");
+
+                //delId = Guid.Parse(Console.ReadLine());
+                var posts = db.Get<Post>().Where(x => x.BlogId == delId);
+                var updateCount = posts.Update(x=> new Post() { Content = x.Content + "bbbbbb"}
+                    );
+                Console.WriteLine($"Modified ele count: {updateCount}");
+                foreach (var post in posts)
+                {
+                    db.Entry(post).Reload();
+                    Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
+                }
+                Console.WriteLine(Environment.NewLine);
+                //var db2 = new CascadeDbContext();
+                db.Get<Post>().Where(x=>x.BlogId == delId).ToList().ForEach(post =>
+                {
+                    Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
+                });
+                
                 //delResult = db.Get<Post>().Where(x => x.BlogId == delId).Delete();
                 //Console.WriteLine($"deleted rows : {delResult}");
             }

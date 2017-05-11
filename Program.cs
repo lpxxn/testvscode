@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace testvscode
 {
@@ -151,6 +152,13 @@ namespace testvscode
 
 
             Expression<Action> normal5 = () => Console.WriteLine("aaaa");
+
+            Func<int, int> isPositive = x =>
+            {
+                return x + 10;
+            };
+            
+
 
             Action action5 = normal5.Compile();
             action5();
