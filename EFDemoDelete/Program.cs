@@ -59,7 +59,7 @@ namespace EFDemoDelete
                 Console.WriteLine($"Modified ele count: {updateCount}");
                 // 如不重新会有缓存
                 foreach (var post in posts)
-                {
+                { 
                     db.Entry(post).Reload();
                     Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
                 }

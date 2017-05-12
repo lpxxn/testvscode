@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDemoDelete", "EFDemoDelet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDemo2Pagination", "EFDemo2Pagination\EFDemo2Pagination.csproj", "{D392D432-6BE1-4B67-83E2-83EE49022C80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemoTransaction", "EfDemoTransaction\EfDemoTransaction.csproj", "{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{D392D432-6BE1-4B67-83E2-83EE49022C80}.Release|x64.Build.0 = Release|Any CPU
 		{D392D432-6BE1-4B67-83E2-83EE49022C80}.Release|x86.ActiveCfg = Release|Any CPU
 		{D392D432-6BE1-4B67-83E2-83EE49022C80}.Release|x86.Build.0 = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|x64.Build.0 = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Debug|x86.Build.0 = Debug|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|x64.ActiveCfg = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|x64.Build.0 = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|x86.ActiveCfg = Release|Any CPU
+		{CDC12B3B-8F6A-49C5-8FC5-9C0FC5567AB0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
