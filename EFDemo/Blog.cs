@@ -15,7 +15,7 @@ namespace EFDemo
         public string Test { get; set; }
         public string Test2 { get; set; }
         public string Test3 { get; set; }
-        public virtual List<Post> Posts { get; set; }
+        public virtual List<Post> Posts { get; set; } = new List<Post>();
 
       
     }

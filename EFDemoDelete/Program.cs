@@ -29,10 +29,12 @@ namespace EFDemoDelete
                         Console.WriteLine($" ------    PostID = {post.PostId}, BlogId = {post.BlogId}, Title = {post.Title}, Content = {post.Content}");
                     });
                 });
-                //db.Get<Post>().ToList().ForEach(x =>
-                //{
-                //    Console.WriteLine($"PostID = {x.PostId}, BlogId = {x.BlogId}, Title = {x.Title}, Content = {x.Content}");
-                //});
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Posts");
+                db.Get<Post>().ToList().ForEach(x =>
+                {
+                    Console.WriteLine($"PostID = {x.PostId}, BlogId = {x.BlogId}, Title = {x.Title}, Content = {x.Content}");
+                });
                 Console.WriteLine("type blogId that used to delete:");
                 var delId = Guid.Parse(Console.ReadLine());
                 var model = new Blog() {BlogId = delId};

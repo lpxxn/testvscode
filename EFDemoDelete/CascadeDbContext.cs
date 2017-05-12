@@ -29,7 +29,7 @@ namespace EFDemoDelete
 
 
     // DropCreateDatabaseAlways   CreateDatabaseIfNotExists
-    public class StandardInitialization : CreateDatabaseIfNotExists<CascadeDbContext>
+    public class StandardInitialization : DropCreateDatabaseAlways<CascadeDbContext>
     {
         protected override void Seed(CascadeDbContext context)
         {
@@ -38,9 +38,11 @@ namespace EFDemoDelete
             //context.Get<Blog>().AddRange(new Blog[] { new Blog(){Name = }, })
             for (int i = 0; i < 10; i++)
             {
-                var blog = context.Get<Blog>()
-                .Add(new Blog() { BlogId = Guid.NewGuid(), Name = Utils.RandomString(Utils.RandomInt(3, 7)), Url = Utils.RandomString(10) });
 
+                // BlogId = Guid.NewGuid(),
+                var blog = context.Get<Blog>()
+                .Add(new Blog() {  Name = Utils.RandomString(Utils.RandomInt(3, 7)), Url = Utils.RandomString(10) });
+                context.SaveChanges();
                 for (int postIndex = 0, size = Utils.RandomInt(1, 5); postIndex < size; postIndex++)
                 {
                     context.Get<Post>()
@@ -54,6 +56,26 @@ namespace EFDemoDelete
                 }
             }
 
+            for (int postIndex = 0, size = Utils.RandomInt(0, 5); postIndex < size; postIndex++)
+            {
+                context.Get<Post>()
+                    .Add(new Post()
+                    {
+                        PostId = Guid.NewGuid(),
+                       
+                        Title = Utils.RandomString(Utils.RandomInt(0, 5)),
+                        Content = Utils.RandomString(Utils.RandomInt(0, 10)),
+                    });
+            }
+
+            context.Get<Blog>()
+                .Add(new Blog() { Name = "LpLp", Url = Utils.RandomString(10) }).Posts.Add(
+                new Post()
+                {
+                    Title = @"LLLLPPPPPP",
+                    Content = Utils.RandomString(Utils.RandomInt(0, 10)),
+                }
+                );
             context.SaveChanges();
             
 

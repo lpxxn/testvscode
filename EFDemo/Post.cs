@@ -13,7 +13,7 @@ namespace EFDemo
         public string Title { get; set; }
         public string Content { get; set; }
 
-        public Guid BlogId { get; set; }
+        public Guid? BlogId { get; set; }
         [ForeignKey("BlogId")]
         public virtual Blog Blog { get; set; }
     }
