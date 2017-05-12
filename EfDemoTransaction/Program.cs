@@ -34,6 +34,7 @@ namespace EfDemoTransaction
                     Console.WriteLine(
                         $"PostID = {x.PostId}, BlogId = {x.BlogId}, Title = {x.Title}, Content = {x.Content}");
                 });
+                
                 Console.WriteLine("type blogId that used to Update:");
                 var blogGuid = Guid.Parse(Console.ReadLine());
                 var model = new Blog() { BlogId = blogGuid };
@@ -46,6 +47,31 @@ namespace EfDemoTransaction
                         db.Get<Post>().Where(x => x.BlogId == blogGuid).Update(x => new Post() {BlogId = null});
 
                         db.Get<Blog>().Where(x => x.BlogId == blogGuid).Delete();
+                        db.SaveChanges();
+
+                        transaction.Complete();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("have error");
+                        Console.WriteLine(e);
+                    }
+                }
+
+
+                Console.WriteLine("type blogId that used to Update:");
+                blogGuid = Guid.Parse(Console.ReadLine());
+                Console.WriteLine("Move Posts to BlogId");
+                var boBlogGuid = Guid.Parse(Console.ReadLine());
+
+
+                using (var transaction = new TransactionScope())
+                {
+                    try
+                    {
+                        db.Get<Post>().Where(x => x.BlogId == blogGuid).Update(x => new Post() { BlogId = boBlogGuid , Title = x.Title + "moved"});
+
+                        db.Get<Blog>().Where(x => x.BlogId == blogGuid).Update(x=> new Blog() {Name = x.Name + "Modified"});
                         db.SaveChanges();
 
                         transaction.Complete();
