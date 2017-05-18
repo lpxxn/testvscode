@@ -5,9 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
-namespace testvscode
+namespace ConsoleApp1
 {
     public class EnumClass
     {
@@ -186,6 +185,8 @@ namespace testvscode
             {
                 Console.WriteLine($"have element {MyColors.ligth}");
             }
+
+          
         }
 
         [Flags]
@@ -216,10 +217,13 @@ namespace testvscode
             return ClassCode;
         }
 
+
+       
     }
 
+   
 
-   public class Program1
+    public class Program1
     {
 
         static void Main(string[] args2)

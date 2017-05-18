@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+ 
+  
+  <PropertyGroup>
+    <OutputType>exe</OutputType>
+    <TargetFramework>net452</TargetFramework>
+    <StartupObject>ConsoleApp1.Program2</StartupObject>
+  </PropertyGroup>
+
+</Project>

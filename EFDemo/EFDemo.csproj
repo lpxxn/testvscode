@@ -53,14 +53,6 @@
   <ItemGroup>
     <Compile Include="Blog.cs" />
     <Compile Include="BloggingContext.cs" />
-    <Compile Include="Migrations\201705100706099_a.cs" />
-    <Compile Include="Migrations\201705100706099_a.Designer.cs">
-      <DependentUpon>201705100706099_a.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705100719344_abc.cs" />
-    <Compile Include="Migrations\201705100719344_abc.Designer.cs">
-      <DependentUpon>201705100719344_abc.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Program.cs" />
@@ -71,14 +63,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705100706099_a.resx">
-      <DependentUpon>201705100706099_a.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705100719344_abc.resx">
-      <DependentUpon>201705100719344_abc.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

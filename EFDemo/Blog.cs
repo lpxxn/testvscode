@@ -13,10 +13,20 @@ namespace EFDemo
         public string Name { get; set; }
         public string Url { get; set; }
         public string Test { get; set; }
-        public string Test2 { get; set; }
-        public string Test3 { get; set; }
+
+        public DateTime CreatedTime
+        {
+            get
+            {
+                return _createdTime ?? DateTime.Now;
+            }
+            set { this._createdTime = value; }
+        }
+        private DateTime? _createdTime = null;
         public virtual List<Post> Posts { get; set; } = new List<Post>();
 
-      
+        public Blog()
+        {
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace EfDemoTransaction
             {
                 db.Get<Blog>().ToList().ForEach(x =>
                 {
-                    Console.WriteLine($"Id = {x.BlogId}, Name = {x.Name}, Url = {x.Url}");
+                    Console.WriteLine($"Id = {x.BlogId}, Name = {x.Name}, Url = {x.Url}, DateTime = {x.CreatedTime}");
                     x.Posts.ForEach(post =>
                     {
                         Console.WriteLine(
