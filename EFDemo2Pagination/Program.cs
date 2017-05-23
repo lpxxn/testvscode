@@ -18,6 +18,9 @@ namespace EFDemo2Pagination
             using (var db = new PaginationDbContext())
             {
 
+                var utquerey = db.User.Where(x => x.Age > 12).Select(x=> new TUser(){ Age = x.Age, Name = x.Name});
+                var utList = utquerey.Where(x => x.Age < 100).ToList();
+
                 Console.WriteLine("--------------------------");
                 var q = db.User.Where(x => x.Age > 10).OrderBy(x => x.CreatedTime);
                 db.User.Add(User.NewUser());
@@ -35,7 +38,11 @@ namespace EFDemo2Pagination
         }
     }
 
-
+    public class TUser
+    {
+        public int Age { get; set; }
+        public string Name { get; set; }
+    }
 
 
 

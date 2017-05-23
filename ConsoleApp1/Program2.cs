@@ -8,7 +8,6 @@ namespace ConsoleApp1
     {
         public static void Main(string[] args)
         {
-            
             Test();
             Console.WriteLine("hello world");
             Console.ReadLine();

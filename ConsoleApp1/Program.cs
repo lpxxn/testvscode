@@ -29,6 +29,7 @@ namespace ConsoleApp1
     {
         static string GetIP4Address()
         {
+          
             string IP4Address = String.Empty;
 
             
