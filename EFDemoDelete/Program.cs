@@ -37,8 +37,19 @@ namespace EFDemoDelete
                 });
                 Console.WriteLine("type blogId that used to delete:");
                 var delId = Guid.Parse(Console.ReadLine());
-                var model = new Blog() {BlogId = delId};
-
+                Console.WriteLine($"post count {db.Get<Post>().Count()}");
+                var model = db.Get<Blog>().Include(x => x.Posts).SingleOrDefault(x => x.BlogId == delId);
+                var postIds = model.Posts.Select(x => x.PostId).ToList();
+                Console.WriteLine(postIds);
+                db.Get<Blog>().Remove(model);
+                db.SaveChanges();
+                // include all child 这样删除时才不会删除子节点
+                var delPosts = db.Get<Post>().Where(x => postIds.Contains(x.PostId)).ToList();
+                Console.WriteLine($"post count {db.Get<Post>().Count()}");
+                delPosts.ForEach(x =>
+                {
+                    Console.WriteLine($"PostID = {x.PostId}, BlogId = {x.BlogId}, Title = {x.Title}, Content = {x.Content}");
+                });
                 // 1
                 //db.Get<Blog>().Attach(model);
                 // 2

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +11,24 @@ namespace ExpressionDemo1
 {
     class Program
     {
+        //Func<IEnumerable<int>, int, bool> dividesectionmethod = (x, y) =>
+        //{
+        //    int nos1 = 0;
+        //    int nos2 = 0;
+        //    foreach (int i in x)
+        //    {
+        //        if (i <= y)
+        //            nos1++;
+        //        else
+        //            nos2++;
+        //    }
+        //    return nos1 > nos2;
+        //};
+        
+
         static void Main(string[] args)
         {
-            ParseExpression1();
+            
 
             ComposeFuncLambda();
 
@@ -23,6 +39,8 @@ namespace ExpressionDemo1
 
         private static void ComposeFuncLambda2()
         {
+            #region 
+
             ParameterExpression enumerableExpression = Expression.Parameter(typeof(IEnumerable<int>), "x");
             ParameterExpression intexpression = Expression.Parameter(typeof(int), "y");
 
@@ -46,6 +64,9 @@ namespace ExpressionDemo1
 
             LabelTarget looTarget2 = Expression.Label(typeof(bool));
             ParameterExpression resValParam = Expression.Parameter(typeof(bool), "resVal");
+
+            #endregion
+
 
             BlockExpression block = Expression.Block(
                 new ParameterExpression[] { localVarNos1, localVarNos2, enumerator, currentElement, resValParam },
@@ -89,20 +110,6 @@ namespace ExpressionDemo1
             var resVal = dividesctionMethod(new[] { 1, 2, 3, 4, 5, 6 }, 1);
             Console.WriteLine(resVal);
         }
-
-        //Func<IEnumerable<int>, int, bool> dividesectionmethod = (x, y) =>
-        //{
-        //    int nos1 = 0;
-        //    int nos2 = 0;
-        //    foreach (int i in x)
-        //    {
-        //        if (i <= y)
-        //            nos1++;
-        //        else
-        //            nos2++;
-        //    }
-        //    return nos1 > nos2;
-        //};
 
         private static void ComposeFuncLambda()
         {
@@ -186,3 +193,4 @@ namespace ExpressionDemo1
         }
     }
 }
+

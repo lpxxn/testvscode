@@ -29,7 +29,7 @@ namespace EFDemoDelete
 
 
     // DropCreateDatabaseAlways   CreateDatabaseIfNotExists
-    public class StandardInitialization : DropCreateDatabaseAlways<CascadeDbContext>
+    public class StandardInitialization : CreateDatabaseIfNotExists<CascadeDbContext>
     {
         protected override void Seed(CascadeDbContext context)
         {
