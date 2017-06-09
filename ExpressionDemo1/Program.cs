@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace ExpressionDemo1
 {
@@ -25,7 +27,6 @@ namespace ExpressionDemo1
         //    }
         //    return nos1 > nos2;
         //};
-
 
         static void Main(string[] args)
         {
@@ -120,6 +121,8 @@ namespace ExpressionDemo1
             var path = GetPropertyName<Animal, int>(x => aimal.Age);
 
             var path2 = GetPropertyName<Animal, string>(x => aimal.Info.Desc);
+            aimal.GetName(x => x.Species);
+            aimal.GetName(x => x.Age);
 
         }
 
@@ -135,12 +138,53 @@ namespace ExpressionDemo1
                 return value;
             }
 
-
-            return "";
+            return string.Empty;
         }
+
 
         private static void ComposeFuncLambda3()
         {
+            ParameterExpression enumParam = Expression.Parameter(typeof(IEnumerable<int>), "enumerable");
+            ParameterExpression intParam = Expression.Parameter(typeof(int), "y");
+
+            ParameterExpression nos1Var = Expression.Variable(typeof(int), "nos1");
+            ParameterExpression nos2Var = Expression.Variable(typeof(int), "nos2");
+            BinaryExpression assignNos1Var = Expression.Assign(nos1Var, Expression.Constant(0));
+            BinaryExpression assignNos2Var = Expression.Assign(nos2Var, Expression.Constant(0));
+
+            ParameterExpression enumeratorTParam = Expression.Variable(typeof(IEnumerator<int>), "enumerator");
+            BinaryExpression assingEnumeratorTParam = Expression.Assign(enumeratorTParam,
+                Expression.Call(enumParam, typeof(IEnumerable<int>).GetMethod("GetEnumerator")));
+
+            ParameterExpression currentVar = Expression.Variable(typeof(int), "current");
+            BinaryExpression assignCurrentVar = Expression.Assign(currentVar, Expression.Property(enumeratorTParam, "Current"));
+
+            BinaryExpression nos1VarAdd1 = Expression.AddAssign(nos1Var, Expression.Constant(1));
+            BinaryExpression nos2VarAdd1 = Expression.AddAssign(nos2Var, Expression.Constant(1));
+
+            ParameterExpression boolReVal = Expression.Variable(typeof(bool), "boolReVal");
+
+            BinaryExpression assignBoolReval = Expression.Assign(boolReVal, Expression.GreaterThan(nos1Var, nos2Var));
+
+            LabelTarget returnLabel = Expression.Label(typeof(bool), "reval");
+
+
+            BlockExpression blockExpression =
+                Expression.Block(new ParameterExpression[] {nos1Var, nos2Var, enumeratorTParam, currentVar, boolReVal },
+                    assignNos1Var, assignNos2Var, assingEnumeratorTParam, 
+                    Expression.Loop(Expression.IfThenElse(Expression.Equal(Expression.Call(enumeratorTParam, typeof(IEnumerator).GetMethod("MoveNext")), Expression.Constant(true)),
+                    Expression.Block(assignCurrentVar, Expression.IfThenElse(Expression.GreaterThan(currentVar, intParam), nos1VarAdd1, nos2VarAdd1)),
+                    Expression.Block(assignBoolReval, Expression.Break(returnLabel, boolReVal))
+                    ), returnLabel));
+
+            Expression<Func<IEnumerable<int>, int, bool>> expressionT =
+                Expression.Lambda<Func<IEnumerable<int>, int, bool>>(blockExpression, enumParam, intParam);
+
+            var e = expressionT.Compile();
+            var erval = e(new List<int>() {100, 200, 3, 50}, 20);
+
+
+            // right
             ParameterExpression enumerableParam = Expression.Parameter(typeof(IEnumerable<int>), "enumerable");
             ParameterExpression intParameter = Expression.Parameter(typeof(int), "x");
 
@@ -154,7 +198,6 @@ namespace ExpressionDemo1
                 Expression.Call(enumerableParam, typeof(IEnumerable<int>).GetMethod("GetEnumerator")));
 
             MethodCallExpression moveNext = Expression.Call(enumerator, typeof(IEnumerator).GetMethod("MoveNext"));
-
 
 
             ParameterExpression currentParamter = Expression.Variable(typeof(int), "current");
