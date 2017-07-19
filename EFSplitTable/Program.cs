@@ -29,7 +29,12 @@ namespace EFSplitTable
 
                 var s1 = context.StudentsPhotos.First(x => x.StudentId == 1);
                 s1.FileName = "haha";               
-                context.SaveChanges();                
+                context.SaveChanges();
+
+                var s2 = context.StudentsAddresses.First(x => x.StudentId == 2);
+                s2.Address2 = "modify222";
+                context.Entry(s2).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
             }
 
             Console.WriteLine("Database Created!!!");
