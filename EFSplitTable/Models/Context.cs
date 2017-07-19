@@ -29,11 +29,6 @@ namespace EFSplitTable.Models
                .HasRequired(e => e.StudentPhoto)
                .WithRequiredPrincipal();
 
-            modelBuilder.Entity<Student>().ToTable("Students");
-            modelBuilder.Entity<StudentAddress>().ToTable("Students");
-            modelBuilder.Entity<StudentPhoto>().ToTable("Students");
-
-
             base.OnModelCreating(modelBuilder);
         }
     }

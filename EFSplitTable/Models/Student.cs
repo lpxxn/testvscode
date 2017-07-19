@@ -16,9 +16,10 @@ namespace EFSplitTable.Models
 
         public string Name { get; set; }
 
-        
-        public virtual StudentPhoto StudentPhoto { get; set; } = new StudentPhoto();
+        [Required]
+        public virtual StudentPhoto StudentPhoto { get; set; }
 
-        public virtual StudentAddress StudentAddress { get; set; } = new StudentAddress();
+        [Required]
+        public virtual StudentAddress StudentAddress { get; set; }
     }
 }
