@@ -19,6 +19,12 @@ namespace EFSplitTable.Models
         public DbSet<StudentAddress> StudentsAddresses { get; set; }
         public DbSet<StudentPhoto> StudentsPhotos { get; set; }
 
+
+        public DbSet<T> Get<T>() where T :class 
+        {
+            return this.Set<T>();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>()

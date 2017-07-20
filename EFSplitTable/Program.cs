@@ -27,18 +27,26 @@ namespace EFSplitTable
                 context.Students.Add(student2);
                 context.SaveChanges();
 
-                var s1 = context.StudentsPhotos.First(x => x.StudentId == 1);
+                var s1 = context.StudentsPhotos.First();
                 s1.FileName = "haha";
                 context.SaveChanges();
 
-                var s2 = context.StudentsAddresses.First(x => x.StudentId == 2);
+                var s2 = context.StudentsAddresses.First();
                 s2.Address2 = "modify222";
                 context.Entry(s2).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
                 //var s4 = context.Students.Where(x => x.StudentId == 4).ToList();
-                var s3 = context.Students.FirstOrDefault(x => x.StudentId == 4);
+                var s3 = context.Students.First();
                 Console.WriteLine($"{s3.Name}, {s3.StudentAddress.Address2}, {s3.StudentPhoto.FileName}");
+
+
+                //context.Get<Student>().Remove(s3); 
+                context.Entry(s3.StudentAddress).State = EntityState.Deleted;
+                context.Entry(s3.StudentPhoto).State = EntityState.Deleted;
+                context.Entry(s3).State = EntityState.Deleted;
+                
+                context.SaveChanges();
 
             }
 
