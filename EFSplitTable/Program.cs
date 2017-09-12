@@ -33,7 +33,7 @@ namespace EFSplitTable
 
                 var s2 = context.StudentsAddresses.First();
                 s2.Address2 = "modify222";
-                context.Entry(s2).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(s2).State = EntityState.Modified;
                 context.SaveChanges();
 
                 //var s4 = context.Students.Where(x => x.StudentId == 4).ToList();
@@ -48,6 +48,15 @@ namespace EFSplitTable
                 
                 context.SaveChanges();
 
+                var queryStudent = context.Get<Student>().SqlQuery("select * from Students2");
+                foreach (var student1 in queryStudent)
+                {
+                    Console.WriteLine($" Name :{student1.Name} id: {student1.StudentId}");
+                }
+
+
+              
+               
             }
 
             Console.WriteLine("Database Created!!!");

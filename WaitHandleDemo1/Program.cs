@@ -72,4 +72,25 @@ namespace WaitHandleDemo1
 
     }
 
+
+    public interface ABase<out T> where T: class
+    {
+        T Fun1();
+
+    }
+
+    public partial class ASun
+    {
+        public const string Desc = "hello";
+    }
+
+    public partial class  ASun : ABase<ASun>
+    {
+        public string Name { get; set; }
+        public ASun Fun1()
+        {
+            var a = new ASun() {Name = this.Name};
+            return a;
+        }
+    }
 }

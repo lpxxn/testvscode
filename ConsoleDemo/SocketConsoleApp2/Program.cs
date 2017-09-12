@@ -33,6 +33,8 @@ namespace SocketConsoleApp2
                 client.Connect(remoteEP);
 
                 // Translate the passed message into ASCII and store it as a Byte array.
+                //Byte[] data = System.Text.Encoding.Default.GetBytes(message);
+                var d = Encoding.Default;
                 Byte[] data = System.Text.Encoding.Default.GetBytes(message);
 
                 // Get a client stream for reading and writing.
